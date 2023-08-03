@@ -1,11 +1,11 @@
-# streamlit-custom-component
+# streamlit-audio-plot
 
-Streamlit component that allows you to do X
+Streamlit component that allows you to plot audio embeddings as a plotly figure with source audio playback on hover or click.
 
 ## Installation instructions
 
 ```sh
-pip install streamlit-custom-component
+pip install streamlit-audio-plot
 ```
 
 ## Usage instructions
@@ -13,9 +13,8 @@ pip install streamlit-custom-component
 ```python
 import streamlit as st
 
-from my_component import my_component
+from audio_plot import audio_plot
 
-value = my_component()
+audio_plot()  # TODO: add usage instructions
 
-st.write(value)
 ```

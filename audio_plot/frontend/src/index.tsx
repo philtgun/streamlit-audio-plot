@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import MyComponent from "./MyComponent"
+import AudioPlot from "./AudioPlot"
 
 ReactDOM.render(
   <React.StrictMode>
-    <MyComponent />
+    <AudioPlot />
   </React.StrictMode>,
   document.getElementById("root")
 )

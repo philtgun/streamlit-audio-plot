@@ -6,11 +6,11 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
-    name="streamlit-custom-component",
-    version="0.0.1",
-    author="John Smith",
-    author_email="john@example.com",
-    description="Streamlit component that allows you to do X",
+    name="streamlit-audio-plot",
+    version="0.1.0",  # need to sync with node
+    author="Philip Tovstogan",
+    author_email="phil.tovstogan@gmail.com",
+    description="Streamlit component that allows you to do plot audio embeddings as a plotly figure with source audio playback on hover or click.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="",

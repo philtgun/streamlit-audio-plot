@@ -14,7 +14,7 @@ interface State {
  * This is a React-based component template. The `render()` function is called
  * automatically when your component should be re-rendered.
  */
-class MyComponent extends StreamlitComponentBase<State> {
+class AudioPlot extends StreamlitComponentBase<State> {
   public state = { numClicks: 0, isFocused: false }
 
   public render = (): ReactNode => {
@@ -33,9 +33,8 @@ class MyComponent extends StreamlitComponentBase<State> {
     if (theme) {
       // Use the theme object to style our button border. Alternatively, the
       // theme style is defined in CSS vars.
-      const borderStyling = `1px solid ${
-        this.state.isFocused ? theme.primaryColor : "gray"
-      }`
+      const borderStyling = `1px solid ${this.state.isFocused ? theme.primaryColor : "gray"
+        }`
       style.border = borderStyling
       style.outline = borderStyling
     }
@@ -86,4 +85,4 @@ class MyComponent extends StreamlitComponentBase<State> {
 // passing arguments from Python -> Component.
 //
 // You don't need to edit withStreamlitConnection (but you're welcome to!).
-export default withStreamlitConnection(MyComponent)
+export default withStreamlitConnection(AudioPlot)
