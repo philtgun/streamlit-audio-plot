@@ -13,9 +13,9 @@ if not _RELEASE:
 else:
     parent_dir = os.path.dirname(os.path.abspath(__file__))
     build_dir = os.path.join(parent_dir, "frontend-react/build")
-    _component_func = components.declare_component("my_component", path=build_dir)
+    _component_func = components.declare_component("audio_plot", path=build_dir)
 
-def audio_plot(name, key=None):
+def audio_plot(key=None):
     """Create a new instance of "my_component".
 
     Parameters
@@ -29,7 +29,7 @@ def audio_plot(name, key=None):
         be re-mounted in the Streamlit frontend and lose its current state.
 
     """
-    return _component_func(name=name, key=key, default=0)
+    return _component_func(data={}, key=key)
 
 
 
@@ -38,5 +38,4 @@ if not _RELEASE:
 
     # Create an instance of our component with a constant `name` arg, and
     # print its output value.
-    num_clicks = audio_plot("World")
-    st.markdown("You've clicked %s times!" % int(num_clicks))
+    audio_plot()
