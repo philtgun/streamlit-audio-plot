@@ -1,5 +1,7 @@
 import os
 
+import numpy as np
+import pandas as pd
 import streamlit.components.v1 as components
 
 _RELEASE = False
@@ -20,17 +22,14 @@ def audio_plot(key=None):
 
     Parameters
     ----------
-    name: str
-        The name of the thing we're saying hello to. The component will display
-        the text "Hello, {name}!"
-    key: str or None
-        An optional key that uniquely identifies this component. If this is
-        None, and the component's arguments are changed, the component will
-        be re-mounted in the Streamlit frontend and lose its current state.
+
 
     """
-    return _component_func(data={}, key=key)
-
+    urls = [
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3#t=0.0,3.0",
+            "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3#t=60.0,63.0",
+        ]
+    return _component_func(x=[0,1], y=[1,-2], urls=urls, height=800, key=key)
 
 
 if not _RELEASE:

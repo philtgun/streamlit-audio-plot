@@ -1,4 +1,5 @@
 import {
+  ArrowTable,
   StreamlitComponentBase,
   withStreamlitConnection,
 } from "streamlit-component-lib"
@@ -22,17 +23,24 @@ class AudioPlot extends StreamlitComponentBase<State> {
   //   this.audioPlayerRef = React.createRef();
   // }
 
-  public state = {}
-
+  public state = {
+    urls: [],
+  }
 
   public render = (): ReactNode => {
+    const { args } = this.props
+
+    const urls = args["urls"]
+    this.setState({ urls })
+
+    const height = args["height"] ? args["height"] : 600
 
     // Streamlit sends us a theme object via props that we can use to ensure
     // that our component has visuals that match the active theme in a
     // streamlit app.
     const { theme } = this.props
     const style: React.CSSProperties = {
-      height: "600px",
+      height: height,
     }
 
     // Maintain compatibility with older versions of Streamlit that don't send
@@ -46,8 +54,8 @@ class AudioPlot extends StreamlitComponentBase<State> {
         <Plot
           data={[
             {
-              x: [1, 2, 3],
-              y: [2, 6, 3],
+              x: args["x"],
+              y: args["y"],
               type: 'scatter',
               mode: 'markers',
             },
@@ -86,7 +94,8 @@ class AudioPlot extends StreamlitComponentBase<State> {
 
   private _onHover = (event: any) => {
     console.log("hover", event)
-    this.playAudio("https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3#t=291.0,294.0")
+    const url = this.state.urls[event.points[0].pointIndex]
+    this.playAudio(url)
   }
 
 }
