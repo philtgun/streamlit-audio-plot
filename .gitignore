@@ -71,3 +71,6 @@ template-reactless/**/package-lock.json
 # VSCode
 ########################################################################
 .vscode/
+
+# Github Actions secrets
+my.secrets

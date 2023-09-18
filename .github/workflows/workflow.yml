@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Upload Python Package
+name: Build and upload python package
 
 on:
   release:
@@ -22,6 +22,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Build frontend
+      working-directory: ./audio_plot/frontend
+      run: |
+        npm install
+        npm run build
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
@@ -37,4 +46,3 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
-        repository-url: https://test.pypi.org/legacy/
