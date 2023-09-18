@@ -5,7 +5,7 @@ import {
 import React, { ReactNode, createRef } from "react"
 import Plot from 'react-plotly.js'
 
-interface State {}
+interface State { }
 
 /**
  * This is a React-based component template. The `render()` function is called
@@ -74,13 +74,13 @@ class AudioPlot extends StreamlitComponentBase<State> {
           config={{
             scrollZoom: true,
           }}
-          onHover={this._onHover}
-          onClick={this._onClick}
+          onHover={args.event === "hover" ? this._playAudioOnEvent : undefined}
+          onClick={args.event === "click" ? this._playAudioOnEvent : undefined}
         />
         <audio
-          src=""
+          style={{ margin: 'auto', display: 'block' }}
           ref={this.audioPlayerRef}
-          controls
+          controls={!args.hidePlayer}
         />
       </div>
     )
@@ -96,12 +96,7 @@ class AudioPlot extends StreamlitComponentBase<State> {
     }
   }
 
-  private _onClick = (event: any) => {
-    console.log("click", event)
-  }
-
-  private _onHover = (event: any) => {
-    console.log("hover", event)
+  private _playAudioOnEvent = (event: any) => {
     const url = this.props.args.urls[event.points[0].pointIndex]
     this.playAudio(url)
   }
