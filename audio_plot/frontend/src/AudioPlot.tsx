@@ -4,6 +4,7 @@ import {
 } from "streamlit-component-lib"
 import React, { ReactNode, createRef } from "react"
 import Plot from 'react-plotly.js'
+import Plotly from 'plotly.js'
 
 interface State { }
 
@@ -38,19 +39,30 @@ class AudioPlot extends StreamlitComponentBase<State> {
 
     }
 
+    let data: Plotly.Data[] = [{
+      x: args.embeddings[0],
+      y: args.embeddings[1],
+      type: 'scatter',
+      mode: 'markers',
+      text: args.labels,
+      hoverinfo: 'text',
+    }]
+
+    if (args.extra_embeddings) {
+      data.push({
+        x: args.extra_embeddings[0],
+        y: args.extra_embeddings[1],
+        type: 'scatter',
+        mode: 'markers',
+        text: args.extra_labels,
+        hoverinfo: 'text',
+      })
+    }
+
     return (
       <div style={style}>
         <Plot
-          data={[
-            {
-              x: args.embeddings[0],
-              y: args.embeddings[1],
-              type: 'scatter',
-              mode: 'markers',
-              text: args.labels,
-              hoverinfo: 'text',
-            },
-          ]}
+          data={data}
           layout={{
             margin: {
               b: 0,
@@ -70,24 +82,26 @@ class AudioPlot extends StreamlitComponentBase<State> {
             },
             paper_bgcolor: 'rgba(0,0,0,0.05)',
             plot_bgcolor: 'rgba(0,0,0,0.05)',
+            showlegend: false,
           }}
           config={{
             scrollZoom: true,
           }}
+          useResizeHandler={true}
+          style={{ width: '100%', height: '100%' }}
           onHover={args.event === "hover" ? this._playAudioOnEvent : undefined}
           onClick={args.event === "click" ? this._playAudioOnEvent : undefined}
         />
         <audio
           style={{ margin: 'auto', display: 'block' }}
           ref={this.audioPlayerRef}
-          controls={!args.hidePlayer}
+          controls={!args.hide_player}
         />
       </div>
     )
   }
 
   private playAudio = (url: string) => {
-    console.log(this.audioPlayerRef)
     const audioElement: any = this.audioPlayerRef.current
     if (audioElement) {
       audioElement.src = url
@@ -97,8 +111,10 @@ class AudioPlot extends StreamlitComponentBase<State> {
   }
 
   private _playAudioOnEvent = (event: any) => {
-    const url = this.props.args.urls[event.points[0].pointIndex]
-    this.playAudio(url)
+    if (event.points[0].curveNumber === 0) {  // first trace
+      const url = this.props.args.urls[event.points[0].pointIndex]
+      this.playAudio(url)
+    }
   }
 
 }
