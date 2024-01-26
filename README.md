@@ -1,6 +1,7 @@
 # streamlit-audio-plot
 
 Streamlit component that allows you to plot audio embeddings as a plotly figure with source audio playback on hover or click.
+Supports Python 3.8+
 
 ## Installation instructions
 
@@ -22,7 +23,7 @@ audio_plot(
         "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3#t=0.0,3.0",
         "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3#t=60.0,63.0",
     ]
-)  
+)
 
 # e.g. metadata is a pd.DataFrame
 audio_plot(
@@ -34,27 +35,29 @@ audio_plot(
     volume=0.4,  # between 0. and 1.
     hidePlayer=true,
 )
-``` 
+```
 
 See the docstring for full specifications of parameters.
 
 The JS audio playback requires that the user first interacts with the webpage (e.g. by clicking on the page).
-Otherwise, React with throw a runtime error that will replace the plot. This should be streamlined in the future to not require page reload. 
+Otherwise, React with throw a runtime error that will replace the plot. This should be streamlined in the future to not require page reload.
 
 ## Development instructions
 
 Backend
+
 ```sh
-python3.11 -m venv venv
-source venv/bin/activate
-pip install streamlit
-streamlit run streamlit run audio_plot/__init__.py
+python3.x -m venv venv  # 3.8+
+source venv/bin/activate  # your shell
+pip install -e .
+streamlit run audio_plot/__init__.py
 ```
 
 Frontend (requires nvm or node.js)
+
 ```sh
 cd audio_plot/frontend
-nvm use
+nvm use  # nvm install if not present
 npm install
 npm run start
 ```

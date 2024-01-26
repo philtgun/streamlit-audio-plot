@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import os
-from enum import StrEnum
+from enum import Enum
 
 import numpy as np
 import pandas as pd
@@ -18,7 +20,7 @@ else:
     build_dir = os.path.join(parent_dir, "frontend/build")
     _component_func = components.declare_component("audio_plot", path=build_dir)
 
-class Events(StrEnum):
+class Events(str, Enum):
     HOVER = "hover"
     CLICK = "click"
 

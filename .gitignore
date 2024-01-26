@@ -28,7 +28,7 @@ cffi_bin
 .python-version
 
 # Venv
-venv
+venv*
 
 ########################################################################
 # OSX - https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
